@@ -1,13 +1,11 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-
 public class Biblioteca {
 
-    public String welcomeNote="WELCOME";
-    public String menuOption[]={"VIEW","RESERVE","CHECK LIBRARY NUMBER","EXIT"};
-    String BookNames[]={"When Tomorrow Comes","Inception Point","Prisoner Of Birth","Hamlet"};
-    int[] BookStatus=new int[BookNames.length];
+    public static String welcomeNote="WELCOME";
+    public static String menuOption[]={"VIEW","RESERVE","CHECK LIBRARY NUMBER","EXIT"};
+    Books[] objBooks={new Books("When Tomorrow Comes"),new Books("Inception Point"),new Books("Prisoner Of Birth"),new Books("Hamlet")};
 
     public static void main(String arg[])
     {
@@ -21,12 +19,11 @@ public class Biblioteca {
         System.out.println(welcomeNote);
         System.out.println("*--*--*--*--*");
 
-
         int option=0;
         while(option!=4)
         {
             DisplayMenu();
-         option= chooseMenuOption(inputOption());
+             option= chooseMenuOption(inputOption());
             if(option==1)
             {
                 DisplayBooks();
@@ -80,20 +77,20 @@ public class Biblioteca {
 
     public void DisplayBooks()
     {
-        for(int i=0;i<BookNames.length;i++)
+        for(int i=0;i<objBooks.length;i++)
         {
-            System.out.println((i+1)+"."+BookNames[i]);
+            System.out.println((i+1)+"."+objBooks[i].returnName());
         }
 
     }
     public boolean ReserveBook(int BookCode)
     {
-        if(BookCode>0&&BookCode<=BookNames.length)
+        if(BookCode>0&&BookCode<=objBooks.length)
         {
-            if(BookStatus[BookCode-1]==0)
+            if(objBooks[BookCode-1].getBookStatus()==0)
             {
 
-            BookStatus[BookCode-1]=1;
+            objBooks[BookCode-1].setBookStatus();
 
         System.out.println("\n Thank You! Enjoy the Book \n");
          return true;

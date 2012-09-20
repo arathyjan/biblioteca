@@ -1,29 +1,43 @@
 import static org.junit.Assert.*;
 import  org.junit.Test;
+import java.util.*;
 
 public class Bibliotecatest {
-
-    String Menu[]={"VIEW","RESERVE","CHECK LIBRARY NUMBER","EXIT"};
 
     @Test
     public void WelcomeNoteDisplaysWelcome()
     {
-        Biblioteca objBiblioteca=new Biblioteca();
-        assertEquals("WELCOME",objBiblioteca.welcomeNote);
+        assertEquals("WELCOME",Biblioteca.welcomeNote);
     }
 
     @Test
     public void MenuHaveMinimumOneOption()
     {
-        Biblioteca objBiblioteca=new Biblioteca();
-        assertTrue(0<objBiblioteca.menuOption.length);
+        assertTrue(0<Biblioteca.menuOption.length);
     }
 
     @Test
-    public void CheckMenuOption()
+    public void checkMenuHasViewAsOption()
     {
-        Biblioteca objBiblioteca=new Biblioteca();
-        assertArrayEquals(Menu,objBiblioteca.menuOption);
+        assertTrue(Arrays.toString(Biblioteca.menuOption).contains("VIEW"));
+    }
+
+    @Test
+    public void checkMenuHasReserveAsOption()
+    {
+        assertTrue(Arrays.toString(Biblioteca.menuOption).contains("RESERVE"));
+    }
+
+    @Test
+    public void checkMenuHasCheckLibraryNumberAsOption()
+    {
+        assertTrue(Arrays.toString(Biblioteca.menuOption).contains("CHECK LIBRARY NUMBER"));
+    }
+
+    @Test
+    public void checkMenuHasExitAsOption()
+    {
+        assertTrue(Arrays.toString(Biblioteca.menuOption).contains("EXIT"));
     }
 
     @Test
@@ -31,22 +45,14 @@ public class Bibliotecatest {
     {
         Biblioteca objBiblioteca=new Biblioteca();
         assertFalse(objBiblioteca.chooseMenuOption(-1) == -1);
-
     }
-    //@Test
-    //public void SelectedMenuDoesnotAcceptZeroAsInput()
-    //{
-    //    Biblioteca objBiblioteca=new Biblioteca();
-    //    assertFalse(objBiblioteca.chooseMenuOption(0) == 0);
 
-    //}
 
     @Test
     public void SelectedmenuIsGreaterThanInMenuOption()
     {
         Biblioteca objBiblioteca=new Biblioteca();
         assertFalse(objBiblioteca.chooseMenuOption(5) == 5);
-
     }
 
      @Test
@@ -54,7 +60,6 @@ public class Bibliotecatest {
      {
          Biblioteca objBiblioteca=new Biblioteca();
          assertEquals(objBiblioteca.ReserveBook(1),true);
-
      }
 
       @Test
@@ -63,16 +68,12 @@ public class Bibliotecatest {
           Biblioteca objBiblioteca=new Biblioteca();
           assertEquals(objBiblioteca.ReserveBook(5),false);
       }
+
     @Test
     public void ReserveBookCodeLesserThanBookCode()
     {
         Biblioteca objBiblioteca=new Biblioteca();
         assertEquals(objBiblioteca.ReserveBook(0),false);
     }
-
-
-
-
-
 
 }
