@@ -48,6 +48,20 @@ public class Bibliotecatest {
     }
 
     @Test
+    public void checkMenuHasViewLoginAsOption()
+    {
+        assertTrue(Arrays.toString(Biblioteca.menuOption).contains("LOGIN"));
+
+    }
+
+    @Test
+    public void checkMenuHasViewLogoutAsOption()
+    {
+        assertTrue(Arrays.toString(Biblioteca.menuOption).contains("LOG-OUT"));
+
+    }
+
+    @Test
     public void SelectedMenuDoesnotAcceptNegativeInput()
     {
         Biblioteca objBiblioteca=new Biblioteca();
@@ -84,5 +98,30 @@ public class Bibliotecatest {
         Biblioteca objBiblioteca=new Biblioteca();
         assertEquals(objBiblioteca.ReserveBook(0),false);
     }
+
+    @Test
+    public void CorrectLoginPassword()
+    {
+        Users objUser=new Users("111-1111","arathy","Arathy","arathy@gmail.com",2777833);
+        assertTrue(objUser.Authentication("111-1111","arathy"));
+    }
+
+    @Test
+    public void checkLogin()
+    {
+        Biblioteca objBiblioteca=new Biblioteca();
+        assertEquals("111-1111",objBiblioteca.ValidUser("111-1111","arathy"));
+
+    }
+
+    @Test
+    public void testIfTheUserIsLoggedInOrNot()
+    {
+        Biblioteca objBiblioteca=new Biblioteca();
+        Biblioteca.userLogin="111-1111";
+        assertTrue(objBiblioteca.CheckLoginStatus());
+    }
+
+
 
 }

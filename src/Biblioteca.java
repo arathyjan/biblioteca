@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 public class Biblioteca {
 
     public static String welcomeNote="WELCOME";
-    public static String menuOption[]={"VIEW","RESERVE","CHECK LIBRARY NUMBER","VIEW MOVIES","EXIT"};
+    public static String menuOption[]={"VIEW","RESERVE","CHECK LIBRARY NUMBER","VIEW MOVIES","LOGIN","LOG-OUT","EXIT"};
     Books[] objBooks={new Books("When Tomorrow Comes"),new Books("Inception Point"),new Books("Prisoner Of Birth"),new Books("Hamlet")};
     Movie[] objMovie={new Movie("The Godfather","Francis Ford Coppola",1972,8),
             new Movie("Citizen Kane","Orson Welles",1941,7),
@@ -21,6 +21,10 @@ public class Biblioteca {
             new Movie("Raaz3","Mohit Suri",2012,5),
             new Movie("Jab Tak Hain Jaan","Yash Copra",2012),
             new Movie("Step Up 4","Scott Speer",2012)};
+    Users[] objUsers={new Users("111-1111","arathy","Arathy","arathy@gmail.com",2777833),new Users("111-1112","abhay","Abhay","abhay@yahoo.com",2749710),new Users("111-1113","arun","Arun","arun@gmail.com",2345678)};
+
+    public static String userLogin=null;
+
 
     public static void main(String arg[])
     {
@@ -45,12 +49,22 @@ public class Biblioteca {
             }
             else if(option==2)
             {
-                DisplayBooks();
-                System.out.println("Enter the code of the book to reserve");
-                 ReserveBook(inputOption());
+                if(CheckLoginStatus())
+                {
+                    DisplayBooks();
+                    System.out.println("Enter the code of the book to reserve");
+                    ReserveBook(inputOption());
+                }
+                else
+                    System.out.println("Sorry you are not logged in");
             }
             else if(option==3)
             {
+                if(CheckLoginStatus())
+                {
+                    DisplayUserDetails();
+                }
+                else
                 System.out.println("Please talk to Librarian.Thank you.");
             }
             else if(option==4)
@@ -58,14 +72,86 @@ public class Biblioteca {
 
                 DisplayMovie();
             }
+            else if(option==5)
+            {
+                Login();
+            }
+            else if(option==6)
+            {
+                if(CheckLoginStatus()==true)
+                LogOut();
+            }
         }
         System.out.println("----*----*----*----");
 
     }
 
+    private void DisplayUserDetails() {
+        for(int  i=0;i<objUsers.length;i++)
+        {
+            if(objUsers[i].returnUserName().equals(userLogin))
+            {
+                objUsers[i].DisplayUserDetails();
+                break;
+            }
+        }
+    }
+
+    public boolean CheckLoginStatus()
+    {
+        if(userLogin!=null)
+            return true;
+        return false;
+
+    }
+
+    private void LogOut() {
+        System.out.println("You have successfully logged out");
+        userLogin=null;
+    }
+
+    private void Login() {
+        BufferedReader readInput=new BufferedReader(new InputStreamReader(System.in));
+        String UserName="";
+        String Password="";
+        System.out.println("UserName:");
+        try{
+            UserName=readInput.readLine();
+        }
+        catch(Exception ex){}
+        System.out.println("Password:");
+        try{
+            Password=readInput.readLine();
+        }
+        catch(Exception ex){}
+
+        userLogin=ValidUser(UserName,Password);
+
+    }
+    String ValidUser(String UserName,String Password)
+    {
+        boolean validAuthentication=false;
+        for(int i=0;i<objUsers.length;i++)
+        {
+            validAuthentication=objUsers[i].Authentication(UserName,Password);
+            if(validAuthentication)
+            {
+             System.out.println("You are successfully logged in");
+                return UserName;
+            }
+
+
+        }
+        return null;
+
+
+
+
+    }
+
     private void DisplayMovie() {
         System.out.println("\n");
-        System.out.printf("%-30s %-8s %-30s %s","MOVIE","YEAR","DIRECTOR","RATING");
+        System.out.printf("%-30s %-8s %-30s %s", "MOVIE", "YEAR", "DIRECTOR", "RATING");
         System.out.println();
         for(int i=0;i<objMovie.length;i++)
         objMovie[i].DisplayMovieDetails();
