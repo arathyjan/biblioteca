@@ -41,6 +41,13 @@ public class Bibliotecatest {
     }
 
     @Test
+    public void checkMenuHasViewMovieAsOption()
+    {
+        assertTrue(Arrays.toString(Biblioteca.menuOption).contains("VIEW MOVIES"));
+
+    }
+
+    @Test
     public void SelectedMenuDoesnotAcceptNegativeInput()
     {
         Biblioteca objBiblioteca=new Biblioteca();
@@ -51,8 +58,10 @@ public class Bibliotecatest {
     @Test
     public void SelectedmenuIsGreaterThanInMenuOption()
     {
+        int noOfMenuOption=Biblioteca.menuOption.length;
+        noOfMenuOption++;
         Biblioteca objBiblioteca=new Biblioteca();
-        assertFalse(objBiblioteca.chooseMenuOption(5) == 5);
+        assertFalse(objBiblioteca.chooseMenuOption(noOfMenuOption) == noOfMenuOption);
     }
 
      @Test

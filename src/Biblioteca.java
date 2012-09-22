@@ -4,8 +4,23 @@ import java.io.InputStreamReader;
 public class Biblioteca {
 
     public static String welcomeNote="WELCOME";
-    public static String menuOption[]={"VIEW","RESERVE","CHECK LIBRARY NUMBER","EXIT"};
+    public static String menuOption[]={"VIEW","RESERVE","CHECK LIBRARY NUMBER","VIEW MOVIES","EXIT"};
     Books[] objBooks={new Books("When Tomorrow Comes"),new Books("Inception Point"),new Books("Prisoner Of Birth"),new Books("Hamlet")};
+    Movie[] objMovie={new Movie("The Godfather","Francis Ford Coppola",1972,8),
+            new Movie("Citizen Kane","Orson Welles",1941,7),
+            new Movie("Casablanca","Michael Curtiz",1942,9),
+            new Movie("Gone With the Wind","Victor Fleming",1939,6),
+            new Movie("Seven Samurai","Akira Kurosawa",1959,5),
+            new Movie("Wizard of Oz","Victor Fleming",1939,4),
+            new Movie("On the Waterfront","Elia Kazan",1954,8),
+            new Movie("The Bridge on the River Kwai","David Lean",1957,5),
+            new Movie("Rules Of The Game","Jean Renoir",1939,9),
+            new Movie("The Godfather Part II","Francis Ford Coppola",1974,7),
+            new Movie("Heroine","Madhur Bhandarkar",2012,5),
+            new Movie("Barfi!","Anurag Bhasi",2012,8),
+            new Movie("Raaz3","Mohit Suri",2012,5),
+            new Movie("Jab Tak Hain Jaan","Yash Copra",2012),
+            new Movie("Step Up 4","Scott Speer",2012)};
 
     public static void main(String arg[])
     {
@@ -20,10 +35,10 @@ public class Biblioteca {
         System.out.println("*--*--*--*--*");
 
         int option=0;
-        while(option!=4)
+        while(option!=menuOption.length)
         {
             DisplayMenu();
-             option= chooseMenuOption(inputOption());
+            option= chooseMenuOption(inputOption());
             if(option==1)
             {
                 DisplayBooks();
@@ -38,9 +53,23 @@ public class Biblioteca {
             {
                 System.out.println("Please talk to Librarian.Thank you.");
             }
+            else if(option==4)
+            {
+
+                DisplayMovie();
+            }
         }
         System.out.println("----*----*----*----");
 
+    }
+
+    private void DisplayMovie() {
+        System.out.println("\n");
+        System.out.printf("%-30s %-8s %-30s %s","MOVIE","YEAR","DIRECTOR","RATING");
+        System.out.println();
+        for(int i=0;i<objMovie.length;i++)
+        objMovie[i].DisplayMovieDetails();
+        System.out.println("\n\n");
     }
 
     private void DisplayMenu() {
