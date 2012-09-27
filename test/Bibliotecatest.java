@@ -105,12 +105,31 @@ public class Bibliotecatest {
         Users objUser=new Users("111-1111","arathy","Arathy","arathy@gmail.com",2777833);
         assertTrue(objUser.Authentication("111-1111","arathy"));
     }
+    @Test
+    public void InCorrectLogin()
+    {
+        Users objUser=new Users("111-1111","arathy","Arathy","arathy@gmail.com",2777833);
+        assertFalse(objUser.Authentication("111-111r","arathy"));
+    }
+    @Test
+    public void InCorrectPassword()
+    {
+        Users objUser=new Users("111-1111","arathy","Arathy","arathy@gmail.com",2777833);
+        assertFalse(objUser.Authentication("111-1111","rrrr"));
+    }
 
     @Test
     public void checkLogin()
     {
         Biblioteca objBiblioteca=new Biblioteca();
         assertEquals("111-1111",objBiblioteca.ValidUser("111-1111","arathy"));
+
+    }
+    @Test
+    public void checkWrongLogin()
+    {
+        Biblioteca objBiblioteca=new Biblioteca();
+        assertEquals(null,objBiblioteca.ValidUser("111-11f","arathy"));
 
     }
 

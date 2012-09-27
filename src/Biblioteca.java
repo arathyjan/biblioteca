@@ -5,7 +5,10 @@ public class Biblioteca {
 
     public static String welcomeNote="WELCOME";
     public static String menuOption[]={"VIEW","RESERVE","CHECK LIBRARY NUMBER","VIEW MOVIES","LOGIN","LOG-OUT","EXIT"};
-    Books[] objBooks={new Books("When Tomorrow Comes"),new Books("Inception Point"),new Books("Prisoner Of Birth"),new Books("Hamlet")};
+    Books[] objBooks={new Books("When Tomorrow Comes"),
+            new Books("Inception Point"),
+            new Books("Prisoner Of Birth"),
+            new Books("Hamlet")};
     Movie[] objMovie={new Movie("The Godfather","Francis Ford Coppola",1972,8),
             new Movie("Citizen Kane","Orson Welles",1941,7),
             new Movie("Casablanca","Michael Curtiz",1942,9),
@@ -21,7 +24,9 @@ public class Biblioteca {
             new Movie("Raaz3","Mohit Suri",2012,5),
             new Movie("Jab Tak Hain Jaan","Yash Copra",2012),
             new Movie("Step Up 4","Scott Speer",2012)};
-    Users[] objUsers={new Users("111-1111","arathy","Arathy","arathy@gmail.com",2777833),new Users("111-1112","abhay","Abhay","abhay@yahoo.com",2749710),new Users("111-1113","arun","Arun","arun@gmail.com",2345678)};
+    Users[] objUsers={new Users("111-1111","arathy","Arathy","arathy@gmail.com",2777833),
+            new Users("111-1112","abhay","Abhay","abhay@yahoo.com",2749710),
+            new Users("111-1113","arun","Arun","arun@gmail.com",2345678)};
 
     public static String userLogin=null;
 
@@ -78,7 +83,7 @@ public class Biblioteca {
             }
             else if(option==6)
             {
-                if(CheckLoginStatus()==true)
+                if(CheckLoginStatus())
                 LogOut();
             }
         }
@@ -130,23 +135,16 @@ public class Biblioteca {
     }
     String ValidUser(String UserName,String Password)
     {
-        boolean validAuthentication=false;
         for(int i=0;i<objUsers.length;i++)
         {
-            validAuthentication=objUsers[i].Authentication(UserName,Password);
-            if(validAuthentication)
+            if(objUsers[i].Authentication(UserName,Password))
             {
              System.out.println("You are successfully logged in");
                 return UserName;
             }
-
-
         }
+        System.out.println("Wrong Username or Password");
         return null;
-
-
-
-
     }
 
     private void DisplayMovie() {
@@ -181,12 +179,10 @@ public class Biblioteca {
            return option;
        }
     public int chooseMenuOption(int option) {
-
         if(option<=0||option>menuOption.length) {
            System.out.println("\n Select A Valid Option!!\n");
             option=0;
         }
-
         return option;
     }
 
@@ -196,7 +192,6 @@ public class Biblioteca {
         {
             System.out.println((i+1)+"."+objBooks[i].returnName());
         }
-
     }
     public boolean ReserveBook(int BookCode)
     {
