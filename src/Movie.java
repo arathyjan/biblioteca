@@ -1,9 +1,9 @@
 
 public class Movie {
-    String Name;
-    String Director;
-    Integer Rating=null;
-    int Year;
+    private String Name;
+    private String Director;
+    private Integer Rating=null;
+    private int Year;
 
     public Movie(String Name,String Director,int Year,int Rating)
     {
@@ -22,7 +22,16 @@ public class Movie {
 
     }
 
-    public void DisplayMovieDetails()
+    public static void DisplayMovie(Movie[] objMovie) {
+        System.out.println("\n");
+        System.out.printf("%-30s %-8s %-30s %s", "MOVIE", "YEAR", "DIRECTOR", "RATING");
+        System.out.println();
+        for(int i=0;i<objMovie.length;i++)
+            objMovie[i].DisplayMovieDetails();
+        System.out.println("\n\n");
+    }
+
+    private void DisplayMovieDetails()
     {
        // System.out.print(Name+"\t"+Year+"\t"+Director+"\t");
         System.out.printf("%-30s %-8d %-30s",Name,Year,Director);

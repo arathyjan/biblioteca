@@ -82,21 +82,21 @@ public class Bibliotecatest {
     public void ReserveBookNotResearved()
      {
          Biblioteca objBiblioteca=new Biblioteca();
-         assertEquals(objBiblioteca.ReserveBook(1),true);
+         assertEquals(Books.ReserveBook(1, objBiblioteca.objBooks), true);
      }
 
       @Test
     public void ReserveBookCodeGreaterThanBookCode()
       {
           Biblioteca objBiblioteca=new Biblioteca();
-          assertEquals(objBiblioteca.ReserveBook(5),false);
+          assertEquals(Books.ReserveBook(5 ,objBiblioteca.objBooks),false);
       }
 
     @Test
     public void ReserveBookCodeLesserThanBookCode()
     {
         Biblioteca objBiblioteca=new Biblioteca();
-        assertEquals(objBiblioteca.ReserveBook(0),false);
+        assertEquals(Books.ReserveBook(0, objBiblioteca.objBooks),false);
     }
 
     @Test
@@ -122,23 +122,22 @@ public class Bibliotecatest {
     public void checkLogin()
     {
         Biblioteca objBiblioteca=new Biblioteca();
-        assertEquals("111-1111",objBiblioteca.ValidUser("111-1111","arathy"));
+        assertEquals("111-1111",Users.ValidUser(objBiblioteca.objUsers,"111-1111","arathy"));
 
     }
     @Test
     public void checkWrongLogin()
     {
         Biblioteca objBiblioteca=new Biblioteca();
-        assertEquals(null,objBiblioteca.ValidUser("111-11f","arathy"));
+        assertEquals(null,Users.ValidUser(objBiblioteca.objUsers, "111-11f","arathy"));
 
     }
 
     @Test
     public void testIfTheUserIsLoggedInOrNot()
     {
-        Biblioteca objBiblioteca=new Biblioteca();
         Biblioteca.userLogin="111-1111";
-        assertTrue(objBiblioteca.CheckLoginStatus());
+        assertTrue(Users.CheckLoginStatus());
     }
 
 
