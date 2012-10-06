@@ -1,5 +1,6 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 public class Biblioteca {
 
@@ -40,6 +41,17 @@ public class Biblioteca {
 
     private void start() {
 
+        ArrayList<Command> menuArrayList=new ArrayList<Command>();
+        menuArrayList.add(new DisplayBooks(objBooks));
+        menuArrayList.add(new ReserveBooks(objBooks));
+        menuArrayList.add(new DisplayUserDetails(objUsers));
+        menuArrayList.add(new DisplayMovie(objMovie));
+        menuArrayList.add(new Login(objUsers));
+        menuArrayList.add(new Logout());
+        Command command=null;
+        CommandInvoker commandInvoker;
+
+
         System.out.println("*--*--*--*--*");
         System.out.println(welcomeNote);
         System.out.println("*--*--*--*--*");
@@ -49,44 +61,12 @@ public class Biblioteca {
         {
             DisplayMenu();
             option= chooseMenuOption(inputOption());
-            if(option==1)
-            {
-                Books.DisplayBooks(objBooks);
-            }
-            else if(option==2)
-            {
-                if(Users.CheckLoginStatus())
-                {
-                    Books.DisplayBooks(objBooks);
-                    System.out.println("Enter the code of the book to reserve");
-                    Books.ReserveBook(inputOption(),objBooks);
-                }
-                else
-                    System.out.println("Sorry you are not logged in");
-            }
-            else if(option==3)
-            {
-                if(Users.CheckLoginStatus())
-                {
-                    Users.DisplayUserDetails(objUsers);
-                }
-                else
-                System.out.println("Please talk to Librarian.Thank you.");
-            }
-            else if(option==4)
-            {
+            if(option>0&&option<=menuArrayList.size())
+            command=menuArrayList.get(option-1);
+            commandInvoker=new CommandInvoker(command);
+            commandInvoker.invoke();
 
-                Movie.DisplayMovie(objMovie);
-            }
-            else if(option==5)
-            {
-                Users.Login(objUsers);
-            }
-            else if(option==6)
-            {
-                if(Users.CheckLoginStatus())
-                Users.LogOut();
-            }
+
         }
         System.out.println("----*----*----*----");
 
@@ -102,7 +82,7 @@ public class Biblioteca {
         System.out.println("Enter Your Option : ");
     }
 
-    public int inputOption()    //read from user and output it as such
+    public static int inputOption()    //read from user and output it as such
        {
 
            BufferedReader readInput=new BufferedReader(new InputStreamReader(System.in));
