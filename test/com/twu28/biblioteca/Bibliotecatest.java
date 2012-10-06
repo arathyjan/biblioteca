@@ -1,4 +1,7 @@
+package com.twu28.biblioteca;
+
 import static org.junit.Assert.*;
+
 import  org.junit.Test;
 import java.util.*;
 
@@ -7,7 +10,7 @@ public class Bibliotecatest {
     @Test
     public void WelcomeNoteDisplaysWelcome()
     {
-        assertEquals("WELCOME",Biblioteca.welcomeNote);
+        assertEquals("WELCOME", Biblioteca.welcomeNote);
     }
 
     @Test
